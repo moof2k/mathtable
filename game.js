@@ -1,22 +1,26 @@
 
 function get_random(min, max) {
-    return Math.floor(Math.random() * (max - min)) + parseInt(min);
+    return Math.floor(Math.random() * (max - min + 1)) + parseInt(min);
 }
 
 
 function GameCntl($scope) {
     $scope.t = '+';
-    $scope.min = 0;
-    $scope.max = 5;
+    $scope.amin = 0;
+    $scope.amax = 5;
+    $scope.bmin = 1;
+    $scope.bmax = 5;
     $scope.problems = [];
 
     $scope.get_params = function() {
         var params = window.location.hash.split("/");
 
-        if (params.length == 4) {
+        if (params.length == 6) {
             $scope.t = params[1];
-            $scope.min = params[2];
-            $scope.max = params[3];
+            $scope.amin = params[2];
+            $scope.amax = params[3];
+            $scope.bmin = params[4];
+            $scope.bmax = params[5];
         }
     }
 
@@ -27,8 +31,8 @@ function GameCntl($scope) {
 
         for (var i = 0; i < 24; i++)
         {
-            a = get_random($scope.min, $scope.max);
-            b = get_random($scope.min, $scope.max);
+            a = get_random($scope.amin, $scope.amax);
+            b = get_random($scope.bmin, $scope.bmax);
             $scope.problems.push([a, $scope.t + " " + b]);
         }
     };
